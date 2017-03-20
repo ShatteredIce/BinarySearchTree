@@ -9,6 +9,7 @@ class BinaryNode {
  public:
   BinaryNode(int); //constructor
   int getValue(); //returns the int stored in the node
+  void setValue(int);
   void setLeftChild(BinaryNode*); //sets the left child of the node
   void setRightChild(BinaryNode*); //sets the right child of the node
   BinaryNode* getLeftChild(); //gets the leftchild of the node, may be null

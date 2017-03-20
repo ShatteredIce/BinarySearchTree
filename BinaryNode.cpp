@@ -17,6 +17,10 @@ int BinaryNode::getValue(){
   return value;
 }
 
+void BinaryNode::setValue(int newValue){
+  value = newValue;
+}
+
  //sets the leftchild of this node
 void BinaryNode::setLeftChild(BinaryNode* newNode){
   leftchild = newNode;
