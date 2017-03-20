@@ -17,6 +17,7 @@ int BinaryNode::getValue(){
   return value;
 }
 
+//sets the value of the node to a new value
 void BinaryNode::setValue(int newValue){
   value = newValue;
 }

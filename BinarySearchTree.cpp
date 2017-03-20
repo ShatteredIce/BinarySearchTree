@@ -35,6 +35,7 @@ int main(){
   cout << "Enter 'file' to use a file as input or 'quit' to exit the program.\n";
   cout << "C++ Project 11 - Nathan Purwosumarto\n\n";
 
+  //loop until user enters 'quit'
   while(true){
     cout << "Initial Numbers: ";
     getInput(input);
@@ -126,6 +127,7 @@ int main(){
   return 0;
 }
 
+//adds a binary node to the tree
 void addBinaryNode(BinaryNode* & head, BinaryNode* newNode){
   if(head == NULL){
     head = newNode;
@@ -135,6 +137,7 @@ void addBinaryNode(BinaryNode* & head, BinaryNode* newNode){
   }
 }
 
+//recursively called to add a binary node to the tree once the head is checked and found to be not null
 void addBinaryNodeRecursion(BinaryNode* current, BinaryNode* newNode){
   //if child value is greater or equal to parent value, go down the right branch
   if(newNode->getValue() >= current->getValue()){
@@ -156,6 +159,7 @@ void addBinaryNodeRecursion(BinaryNode* current, BinaryNode* newNode){
   }
 }
 
+//deletes a binary node from the tree
 bool deleteBinaryNode(BinaryNode* & head, int value){
   if(head == NULL){
     return false;
@@ -166,6 +170,7 @@ bool deleteBinaryNode(BinaryNode* & head, int value){
     //if head has both children
     if(head->getLeftChild() != NULL && head->getRightChild() != NULL){
       temp = head->getLeftChild();
+      //find the rightmost node in the left subtree of head
       if(temp->getRightChild() == NULL){
         temp->setRightChild(head->getRightChild());
         delete head;
@@ -175,6 +180,7 @@ bool deleteBinaryNode(BinaryNode* & head, int value){
         while(temp->getRightChild() != NULL){
           temp = temp->getRightChild();
         }
+        //switch head's value with the rightmost node and delete the rightmost node
         int newHeadValue = temp->getValue();
         temp->setValue(value);
         deleteBinaryNodeRecursion(head->getLeftChild(), value);
@@ -205,10 +211,12 @@ bool deleteBinaryNode(BinaryNode* & head, int value){
   }
 }
 
+//recursively called to delete a binary node from the tree once the head is checked and found to be not null
 bool deleteBinaryNodeRecursion(BinaryNode* current, int value){
   BinaryNode* temp;
   //cout << current->getValue() << endl;
   if(current->getValue() <= value){
+    //if we reach a null node, the value to be deleted is not in the tree
     if(current->getRightChild() == NULL){
       return false;
     }
@@ -216,16 +224,18 @@ bool deleteBinaryNodeRecursion(BinaryNode* current, int value){
       //if node to be deleted has both children
       if(current->getRightChild()->getLeftChild() != NULL && current->getRightChild()->getRightChild() != NULL){
         temp = current->getRightChild()->getLeftChild();
-
+        //if temp has no right child
         if(temp->getRightChild() == NULL){
           temp->setRightChild(current->getRightChild()->getRightChild());
           delete current->getRightChild();
           current->setRightChild(temp);
         }
         else{
+          //go down the right branch of current's left child
           while(temp->getRightChild() != NULL){
             temp = temp->getRightChild();
           }
+          //switch current's value with temp and delete temp
           int newValue = temp->getValue();
           temp->setValue(value);
           deleteBinaryNodeRecursion(current->getRightChild()->getLeftChild(), value);
@@ -259,6 +269,7 @@ bool deleteBinaryNodeRecursion(BinaryNode* current, int value){
     }
   }
   else{
+    //if we reach a null node, the value to be deleted is not in the tree
     if(current->getLeftChild() == NULL){
       return false;
     }
@@ -266,13 +277,14 @@ bool deleteBinaryNodeRecursion(BinaryNode* current, int value){
       //if node to be deleted has both children
       if(current->getLeftChild()->getLeftChild() != NULL && current->getLeftChild()->getRightChild() != NULL){
         temp = current->getLeftChild()->getLeftChild();
-
+        //if temp has no right child
         if(temp->getRightChild() == NULL){
           temp->setRightChild(current->getLeftChild()->getRightChild());
           delete current->getLeftChild();
           current->setLeftChild(temp);
         }
         else{
+          //go down the right branch of current's left child
           while(temp->getRightChild() != NULL){
             temp = temp->getRightChild();
           }
